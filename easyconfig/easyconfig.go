@@ -4,17 +4,14 @@ import (
 	"fmt"
 )
 
-func Dummy() {
-	fmt.Println("dummy")
-
-}
-
 
 type Config struct {
 	path string
 	data map[string]interface{}
 }
 
+
+//TESTME
 func NewConfig(pathToJson string, defaultConfig ...Config) *Config {
 
 	existDefaultConfig := len(defaultConfig) == 1
@@ -50,11 +47,12 @@ func NewConfig(pathToJson string, defaultConfig ...Config) *Config {
 	}
 }
 
-
+//TESTME
 func (c *Config) GetConfigPath() string {
 	return c.path
 }
 
+//TESTME
 func (c *Config) GetConfigData(key ...string) (map[string]interface{}, error ){
 
 	if len(key) == 0 {
@@ -72,6 +70,7 @@ func (c *Config) GetConfigData(key ...string) (map[string]interface{}, error ){
 	return nil, fmt.Errorf("key not found")
 }
 
+//TESTME
 func (c *Config) SaveConfig(overwrite ...bool)error{
 
 	allowOverwrite := len(overwrite) == 1 && overwrite[0]

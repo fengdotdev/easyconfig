@@ -10,17 +10,19 @@ type ConfigBuilder struct {
 	data map[string]interface{}
 }
 
+//TESTME
 func NewConfigBuilder(path string) *ConfigBuilder {
 	return &ConfigBuilder{
 		path: path,
 		data: make(map[string]interface{}),
 	}
 }
-
+//TESTME
 func (c *ConfigBuilder) Add(key string, value interface{}) {
 	c.data[key] = value
 }
 
+//TESTME
 func (c *ConfigBuilder) Build() (*Config, error) {
 
 	if c.IsConfigValid() {
@@ -33,6 +35,7 @@ func (c *ConfigBuilder) Build() (*Config, error) {
 	return nil, fmt.Errorf("invalid config")
 }
 
+//TESTME
 func (c *ConfigBuilder) SaveConfig(overwrite ...bool) error {
 
 	allowOverwrite := len(overwrite) == 1 && overwrite[0]
@@ -66,6 +69,7 @@ func (c *ConfigBuilder) SaveConfig(overwrite ...bool) error {
 }
 
 
+//TESTME
 func (c *ConfigBuilder) createJsonData() ([]byte, error) {
 		jsonData, err := json.Marshal(c.data)
 		if err != nil {
