@@ -3,16 +3,34 @@ package main
 import (
 	"easyconfig/easyconfig"
 	"log"
-	"os"
 )
 
 func main() {
-	easyconfig.Dummy()
 
+	path := "config.json"
+	defaultConfigBulder:= easyconfig.NewConfigBuilder(path)
 
-	stat, err := os.Stat("config.json")
+	// Add some default values
+
+	defaultConfigBulder.Add("port", 8080)
+	defaultConfigBulder.Add("host", "localhost")
+
+	// Build the config
+
+	defaultConfig, err := defaultConfigBulder.Build()
 	if err != nil {
-		log.Println("no exist")
+		log.Fatal(err)
 	}
-	log.Println("exist", stat.Name())
-}
+
+	log.Println(defaultConfig.GetConfigData())
+
+	// Save the config	
+	err = defaultConfigBulder.SaveConfig()
+	if err != nil {
+		panic(err)
+	}
+
+	config := easyconfig.NewConfig(path)
+
+	log.Println(config.GetConfigData())
+	}
