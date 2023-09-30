@@ -2,12 +2,14 @@ package main
 
 import (
 	"easyconfig/easyconfig"
+	"fmt"
 	"log"
 )
 
 //PENDING
 func main() {
 
+	fmt.Println(easyconfig.GetRootAPPPath())
 	path := "config.json"
 	defaultConfigBulder:= easyconfig.NewConfigBuilder(path)
 
@@ -20,7 +22,7 @@ func main() {
 
 	defaultConfig, err := defaultConfigBulder.Build()
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 
 	log.Println(defaultConfig.GetConfigData())
@@ -33,5 +35,6 @@ func main() {
 
 	config := easyconfig.NewConfig(path)
 
-	log.Println(config.GetConfigData())
+	fmt.Printf("config data from file %s: ", path)
+	fmt.Println(config.GetConfigData())
 	}

@@ -12,7 +12,16 @@ import (
 	"github.com/google/uuid"
 )
 
-//TESTME
+
+
+
+func GetRootAPPPath() string {
+	dir, _ := os.Getwd()
+	return dir
+}
+
+
+//TESTME  GetConfig
 func GetConfig(path string) (map[string]interface{}, error) {
 	file, err := ReadFromFile(path)
 	if err != nil {
@@ -27,7 +36,7 @@ func GetConfig(path string) (map[string]interface{}, error) {
 	return data, nil
 }
 
-//TESTME
+//TESTME IsValidPath
 func IsValidPath(path string) bool {
 
 	dir, _ := os.Getwd()
@@ -53,7 +62,7 @@ func CreateJsonDataFromMap(data map[string]interface{}) ([]byte, error) {
 	return json.Marshal(data)
 }
 
-//TESTME
+//TESTME CreateMapFromJsonData
 func CreateMapFromJsonData(jsondata []byte) (map[string]interface{}, error) {
 	var result map[string]interface{}
 	err := json.Unmarshal(jsondata, &result)
@@ -61,13 +70,13 @@ func CreateMapFromJsonData(jsondata []byte) (map[string]interface{}, error) {
 }
 
 
-//TESTME
+//TESTME CheckIfFileExist 
 func CheckIfFileExist (path string) bool {
 	_, err := os.Stat(path)
 	return err== nil
 }
 
-//TESTME
+//TESTME WriteToFile
 func WriteToFile(path string, data []byte) error {
 	file, err := os.Create(path)
 	if err != nil {
@@ -78,7 +87,7 @@ func WriteToFile(path string, data []byte) error {
 	return err
 }
 
-//TESTME
+//TESTME ReadFromFile
 func ReadFromFile(path string) ([]byte, error) {
 	file, err := os.Open(path)
 	if err != nil {
@@ -91,7 +100,7 @@ func ReadFromFile(path string) ([]byte, error) {
 	return data, err
 }
 
-//TESTME
+//TESTME DeleteFile
 func DeleteFile(path string) error {
 	err := os.Remove(path)
 	return err

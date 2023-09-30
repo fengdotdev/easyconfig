@@ -11,7 +11,7 @@ type Config struct {
 }
 
 
-//TESTME
+//TESTME NewConfig
 func NewConfig(pathToJson string, defaultConfig ...Config) *Config {
 
 	existDefaultConfig := len(defaultConfig) == 1
@@ -47,12 +47,12 @@ func NewConfig(pathToJson string, defaultConfig ...Config) *Config {
 	}
 }
 
-//TESTME
+//TESTME (c *Config) GetConfigPath
 func (c *Config) GetConfigPath() string {
 	return c.path
 }
 
-//TESTME
+//TESTME (c *Config) GetConfigData
 func (c *Config) GetConfigData(key ...string) (map[string]interface{}, error ){
 
 	if len(key) == 0 {
@@ -70,7 +70,7 @@ func (c *Config) GetConfigData(key ...string) (map[string]interface{}, error ){
 	return nil, fmt.Errorf("key not found")
 }
 
-//TESTME
+//TESTME (c *Config) SaveConfig
 func (c *Config) SaveConfig(overwrite ...bool)error{
 
 	allowOverwrite := len(overwrite) == 1 && overwrite[0]
