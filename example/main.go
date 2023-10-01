@@ -4,13 +4,27 @@ import (
 	"easyconfig/easyconfig"
 	"fmt"
 	"log"
+	"runtime"
 )
 
 //PENDING
-func main() {
 
+
+
+func Debug(format string, a ...interface{}) {
+    _, file, line, _ := runtime.Caller(1)
+    info := fmt.Sprintf(format, a...)
+
+    log.Printf("[cgl] debug %s:%d %v", file, line, info)
+}
+
+
+func main() {
+ 
 	fmt.Println(easyconfig.GetRootAPPPath())
 	path := "config.json"
+
+
 	defaultConfigBulder:= easyconfig.NewConfigBuilder(path)
 
 	// Add some default values
@@ -25,16 +39,21 @@ func main() {
 		panic(err)
 	}
 
-	log.Println(defaultConfig.GetConfigData())
+	fmt.Println(defaultConfig.GetConfigData())
 
 	// Save the config	
 	err = defaultConfigBulder.SaveConfig()
 	if err != nil {
-		panic(err)
+		Debug("error: %s", err)
 	}
 
 	config := easyconfig.NewConfig(path)
 
 	fmt.Printf("config data from file %s: ", path)
 	fmt.Println(config.GetConfigData())
+
+
+
+
+
 	}

@@ -1,7 +1,7 @@
 package easyconfig
 
 import (
-	"encoding/json"
+	"easyconfig/easyconfig/jsonrepo"
 	"fmt"
 	"os"
 )
@@ -46,8 +46,7 @@ func (c *ConfigBuilder) SaveConfig(overwrite ...bool) error {
 	//WORKING
 	jsondata, err := c.createJsonData()
 	if err != nil {
-		
-		return  fmt.Errorf("%w when wrong in the creation of the jsondata", err)
+		return err
 	}
 
 	// check if file exist
@@ -74,11 +73,15 @@ func (c *ConfigBuilder) SaveConfig(overwrite ...bool) error {
 
 //TESTME (c *ConfigBuilder) createJsonData
 func (c *ConfigBuilder) createJsonData() ([]byte, error) {
-		jsonData, err := json.Marshal(c.data)
-		if err != nil {
-			return nil, err
-		}
-	return jsonData, nil
+		
+	json := jsonrepo.JSONr{}
+
+	jsondata, err := json.MapToJSON(c.data)
+	if err != nil {
+		return nil, err
+	}
+
+	return jsondata, nil
 }
 
 // TODO: implement (c *ConfigBuilder) IsConfigValid

@@ -3,7 +3,7 @@ package easyconfig
 import (
 	"crypto/rand"
 	"crypto/sha256"
-	"encoding/json"
+	"easyconfig/easyconfig/jsonrepo"
 	"fmt"
 	"math/big"
 	"os"
@@ -27,7 +27,13 @@ func GetConfig(path string) (map[string]interface{}, error) {
 	if err != nil {
 		return nil, err
 	}
+  
+	fmt.Println(
+		"file: ", string(file),
+	)
 
+	fmt.Println(
+		file)
 
 	data, err := CreateMapFromJsonData(file)
 	if err != nil {
@@ -59,14 +65,22 @@ func IsValidPath(path string) bool {
 
 //Ok
 func CreateJsonDataFromMap(data map[string]interface{}) ([]byte, error) {
-	return json.Marshal(data)
+	json:=jsonrepo.JSONr{}
+	jsondata, err := json.MapToJSON(data)
+	if err != nil {
+		return nil, err
+	}
+	return jsondata, nil
 }
 
 //TESTME CreateMapFromJsonData
 func CreateMapFromJsonData(jsondata []byte) (map[string]interface{}, error) {
-	var result map[string]interface{}
-	err := json.Unmarshal(jsondata, &result)
-	return result, err
+	json:=jsonrepo.JSONr{}
+	data, err := json.JSONToMap(jsondata)
+	if err != nil {
+		return nil, err
+	}
+	return data, nil
 }
 
 
