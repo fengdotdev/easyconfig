@@ -1,10 +1,12 @@
 package jsonrepo
 
 import (
-	"easyconfig/easyconfig/errorplus"
+	"easyconfig/pkg/errorplus"
 	"encoding/json"
 )
 
+//TESTED
+//MapToJSON converts a map[string]interface{} to a json in []byte
 func (j *JSONr) MapToJSON(m map[string]interface{}) ([]byte, error) {
 
 	//STEP I

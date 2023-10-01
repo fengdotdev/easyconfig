@@ -1,23 +1,26 @@
 package jsonrepo
 
 import (
+	"easyconfig/pkg/errorplus"
 	"encoding/json"
-	"fmt"
 )
 
+
+//TESTED
+//JSONToMap converts a json in []byte to a map[string]interface{}
 func (j *JSONr) JSONToMap(b []byte) (map[string]interface{}, error) {
 
 	var m map[string]interface{}
 
 
 	if len(b) == 0 {
-		return nil, fmt.Errorf("empty json data")
+		return nil, errorplus.ES("empty byte slice", j.JSONToMap)
 	}
 
 	err := json.Unmarshal(b, &m)
 
 	if err != nil {
-		return nil, fmt.Errorf("%s at  package jsonrepo > JSONr > JSONToMap ", err)
+		return nil, errorplus.EE(err, j.JSONToMap)
 	}
 
 	return m, nil

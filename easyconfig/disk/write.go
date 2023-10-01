@@ -1,7 +1,7 @@
 package disk
 
 import (
-	"easyconfig/easyconfig/errorplus"
+	"easyconfig/pkg/errorplus"
 )
 
 func (d *Disk) Write(b []byte, overwrite ...bool) error {
@@ -15,6 +15,6 @@ func (d *Disk) Write(b []byte, overwrite ...bool) error {
 	if allowOverwrite {
 		return nil
 	}
-
-	return errorplus.EString("file already exists", d.Write)
+	 errmsg := "file already exists"
+	return errorplus.ES(errmsg, d.Write)
 }
