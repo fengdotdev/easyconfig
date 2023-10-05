@@ -4,19 +4,10 @@ import (
 	"easyconfig/easyconfig"
 	"fmt"
 	"log"
-	"runtime"
 )
 
-//PENDING
 
 
-
-func Debug(format string, a ...interface{}) {
-    _, file, line, _ := runtime.Caller(1)
-    info := fmt.Sprintf(format, a...)
-
-    log.Printf("[cgl] debug %s:%d %v", file, line, info)
-}
 
 
 func main() {
@@ -44,7 +35,7 @@ func main() {
 	// Save the config	
 	err = defaultConfigBulder.SaveConfig()
 	if err != nil {
-		Debug("error: %s", err)
+		log.Fatal(err)
 	}
 
 	config := easyconfig.NewConfig(path)

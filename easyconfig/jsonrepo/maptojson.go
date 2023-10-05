@@ -1,8 +1,8 @@
 package jsonrepo
 
 import (
-	"easyconfig/pkg/errorplus"
 	"encoding/json"
+	"github.com/fengdotdev/goerrorsplus/e"
 )
 
 //TESTED
@@ -13,7 +13,7 @@ func (j *JSONr) MapToJSON(m map[string]interface{}) ([]byte, error) {
 	jsondata , err:= json.Marshal(m)
 
 	if err != nil {
-		return nil, errorplus.EE(err, j.MapToJSON)
+		return nil, e.E(err, "error marshalling json", []string{"jsonrepo", "MapToJSON"}, j.MapToJSON)
 	}
 
 	return jsondata, nil

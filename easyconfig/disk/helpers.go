@@ -1,14 +1,41 @@
 package disk
 
+import (
+	"os"
+	"strings"
+)
+
 //TESTME
-func (d *Disk) FileExists() bool {
-	panic("not implemented")
+func (d *Disk) IsFileExists(path string) bool {
+_, err := os.Stat(path)
+	return err ==nil
 }
 
 //TESTME
-func (d *Disk) DirectoryExist(b bool) {
-	panic("not implemented")
+func (d *Disk) DirectoryExist(path string)bool {
+
+	_,err := os.Stat(path)
+	return err == nil
 }
+
+//TESTME
+func (d *Disk) FullPath(RawPath,RawFilename string) string {
+
+	fileName :=""
+
+	if strings.HasPrefix(RawFilename, "/") {
+		fileName = strings.TrimPrefix(RawFilename, "/")
+	} else {
+		fileName = RawFilename  
+	}
+
+	if strings.HasSuffix(RawPath, "/") {
+		return RawPath + fileName
+	}
+
+	return RawPath + "/" + fileName
+}
+
 //TESTME
 func (d *Disk) RootDir() string {
 	panic("not implemented")
