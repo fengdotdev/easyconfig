@@ -13,11 +13,10 @@ import (
 func main (){
   
 	b:= []byte("hello world")
-
-	d := disk.NewDisk("/tmp")
-
-	err := d.Write(b, "tmp", "test.txt")
+	d, err := disk.NewDisk("/tmp")
 	if err != nil {
-		fmt.Println(err.V())
+		panic(err)
 	}
+	fmt.Println(d, b)// for debugging
+
 }
