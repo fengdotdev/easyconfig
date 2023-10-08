@@ -3,7 +3,7 @@ package easyconfig
 import (
 	"crypto/rand"
 	"crypto/sha256"
-	"easyconfig/easyconfig/jsonrepo"
+"github.com/fengdotdev/easyconfig/easyconfig/jsonrepo"
 	"fmt"
 	"math/big"
 	"os"

@@ -1,9 +1,9 @@
 package easyconfig
 
 import (
-	"easyconfig/easyconfig/jsonrepo"
 	"fmt"
 	"os"
+	"github.com/fengdotdev/easyconfig/easyconfig/jsonrepo"
 )
 type ConfigBuilder struct {
 	path string

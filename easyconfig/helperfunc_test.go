@@ -1,8 +1,7 @@
 package easyconfig_test
 
 import (
-	"easyconfig/easyconfig"
-
+	"github.com/fengdotdev/easyconfig/easyconfig"
 	"testing"
 
 	"github.com/stretchr/testify/assert"

@@ -1,8 +1,9 @@
 package main
 
 import (
-	"easyconfig/easyconfig/disk"
 	"fmt"
+
+	"github.com/fengdotdev/easyconfig/easyconfig/disk"
 )
 
 //PENDING

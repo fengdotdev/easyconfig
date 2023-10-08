@@ -1,7 +1,7 @@
 package easyconfig_test
 
 import (
-	"easyconfig/easyconfig"
+	"github.com/fengdotdev/easyconfig/easyconfig"
 	"fmt"
 	"os"
 	"testing"
