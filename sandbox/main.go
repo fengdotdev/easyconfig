@@ -13,7 +13,7 @@ import (
 func main (){
   
 	b:= []byte("hello world")
-	d, err := disk.NewDisk("/tmp")
+	d, err := disk.NewStorage("/tmp")
 	if err != nil {
 		panic(err)
 	}

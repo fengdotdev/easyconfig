@@ -6,6 +6,6 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestCreateFile(t *testing.T) {
+func TestNewDisk(t *testing.T) {
 	 assert.Equal(t, 1, 1)
 }
