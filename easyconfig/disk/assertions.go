@@ -4,14 +4,23 @@ import "os"
 
 //------------------  assertions  ------------------//
 
-//TESTME
+//TESTED
 func AssertFileExists(path string) bool {
-	_, err := os.Stat(path)
-	return err == nil
+	info, err := os.Stat(path)
+	if os.IsNotExist(err) {
+		return false
+	}
+	return !info.IsDir()
 }
 
-//TESTME
+//TESTED
 func AssertDirectoryExist(path string) bool {
-	 _, err := os.Stat(path)
-	return  err == nil
+	 info, err := os.Stat(path)
+	if os.IsNotExist(err) {
+		return false
+		
+	}
+	return info.IsDir()
 }
+
+

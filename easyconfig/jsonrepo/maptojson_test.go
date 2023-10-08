@@ -1,9 +1,10 @@
 package jsonrepo_test
 
 import (
-	"easyconfig/easyconfig/jsonrepo"
 	"encoding/json"
 	"testing"
+
+	"github.com/fengdotdev/easyconfig/easyconfig/jsonrepo"
 
 	"github.com/stretchr/testify/assert"
 )

@@ -1,9 +1,10 @@
 package main
 
 import (
-	"easyconfig/easyconfig"
 	"fmt"
 	"log"
+
+	"github.com/fengdotdev/easyconfig/easyconfig"
 )
 
 
