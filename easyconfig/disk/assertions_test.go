@@ -49,8 +49,7 @@ func TestAssertDirectoryExist(t *testing.T) {
 
 	// create a file
 	filepath:= "tempfile.xyz"
-	info,err:=  os.Stat(filepath)
-	assert.False(t, os.Stat(filepath).,false)
+	assert.False(t, disk.AssertFileExists(filepath),false)
 	createfile,err:= os.Create(filepath)
 	if err != nil {
 		t.Errorf("Error creating file: %v", err)
@@ -58,4 +57,5 @@ func TestAssertDirectoryExist(t *testing.T) {
 	createfile.Close()
 	assert.False(t, disk.AssertDirectoryExist(filepath),false)
 	os.Remove("tempfile.xyz")
+
 }

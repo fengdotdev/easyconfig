@@ -2,12 +2,13 @@ package disk
 
 import (
 	"os"
+
 	"github.com/fengdotdev/goerrorsplus/e"
 )
 
 //------------------  Dir Ops  ------------------//
 
-//TESTME
+//TESTED
 func CreateDirectory (path string) (err*e.ErrorPlus) {
 	defer func() {
 		if r := recover(); r != nil {
@@ -27,7 +28,7 @@ func CreateDirectory (path string) (err*e.ErrorPlus) {
 }
 
 
-//TESTME
+//TESTED
 func CreateDirectories(path string) (err *e.ErrorPlus) {
 
 	defer func() {
