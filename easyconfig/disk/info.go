@@ -25,13 +25,52 @@ func GetInfo(path string)(fileinfo fs.FileInfo,err *e.ErrorPlus) {
 }
 
 
-//TESTME
+//TESTED
 func GetInfoUnsecure(path string) fs.FileInfo {
 	fileinfo, er := os.Stat(path)
 	if er != nil {
 		return nil
 	}
 	return fileinfo
+}
+
+
+
+//TESTME
+func FileSize(path string) (int64, *e.ErrorPlus) {
+	if !AssertFileExists(path) {
+		return 0, e.E(nil, "file does not exist", []string{"disk-package"}, FileSize, path)
+	}
+
+	file, er := os.Open(path)
+	if er != nil {
+		return 0, e.E(er, "error at opening the file", []string{"disk-package"}, FileSize, path)
+	}
+
+	defer file.Close()
+
+	stat, er := file.Stat()
+	if er != nil {
+		return 0, e.E(er, "error at getting the file stats", []string{"disk-package"}, FileSize, path)
+	}
+
+	return stat.Size(), nil
+}
+
+//TESTME
+func  FileSizeUnSecure(path string) int64 {
+	file, er := os.Open(path)
+	if er != nil {
+		return 0
+	}
+
+	defer file.Close()
+	stat, er := file.Stat()
+	if er != nil {
+		return 0
+	}
+
+	return stat.Size()
 }
 
 

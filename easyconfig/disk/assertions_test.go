@@ -38,6 +38,9 @@ func TestAssertFileExist(t *testing.T) {
 func TestAssertDirectoryExist(t *testing.T) {
 	dirpath:= "tempdir"
 
+	_, er := os.Stat(dirpath)
+	assert.True(t, os.IsNotExist(er), "directory should not exist")
+	
 	assert.False(t, disk.AssertDirectoryExist(dirpath),false)
 	err:= os.Mkdir(dirpath, 0755)
 	if err != nil {

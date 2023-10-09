@@ -9,7 +9,7 @@ import (
 
 //------------------  File CRUD  ------------------//
 
-// TESTME
+// TESTED
 func CreateFile(path string, b []byte) (err *e.ErrorPlus) {
 	defer func() {
 		if r := recover(); r != nil {
@@ -37,6 +37,8 @@ func CreateFile(path string, b []byte) (err *e.ErrorPlus) {
 	return nil
 }
 
+
+//TESTME
 func  UpdateFile(path string, b []byte) *e.ErrorPlus {
 	
 	if !AssertFileExists(path) {
@@ -144,46 +146,6 @@ func  ReadLargeFile(path string,b chan []byte, err chan *e.ErrorPlus){
 // PENDING
 func StreamFile(path string)(output chan []byte,err * e.ErrorPlus){
 	panic("not implemented")
-}
-
-
-//------------------  File Info  ------------------//
-
-//TESTME
-func FileSize(path string) (int64, *e.ErrorPlus) {
-	if !AssertFileExists(path) {
-		return 0, e.E(nil, "file does not exist", []string{"disk-package"}, FileSize, path)
-	}
-
-	file, er := os.Open(path)
-	if er != nil {
-		return 0, e.E(er, "error at opening the file", []string{"disk-package"}, FileSize, path)
-	}
-
-	defer file.Close()
-
-	stat, er := file.Stat()
-	if er != nil {
-		return 0, e.E(er, "error at getting the file stats", []string{"disk-package"}, FileSize, path)
-	}
-
-	return stat.Size(), nil
-}
-
-//TESTME
-func  FileSizeUnSecure(path string) int64 {
-	file, er := os.Open(path)
-	if er != nil {
-		return 0
-	}
-
-	defer file.Close()
-	stat, er := file.Stat()
-	if er != nil {
-		return 0
-	}
-
-	return stat.Size()
 }
 
 
