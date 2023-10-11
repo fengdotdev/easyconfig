@@ -9,35 +9,84 @@ import (
 
 //TESTED
 func AssertFileExists(path string) bool {
+
+	exists := false
+
+	//criteria 1: file exists
 	info, err := os.Stat(path)
-	if os.IsNotExist(err) {
-		return false
+	if err != nil {
+		return exists
 	}
-	return !info.IsDir()
+	exists = true
+
+	//criteria 2: file is not a directory
+	if  info.IsDir() {
+		exists = false
+		return exists
+	}
+
+	return exists 
 }
 
 //TESTED
 func AssertDirectoryExist(path string) bool {
+
+	exists := false
+
+	//criteria 1: file exists
 	 info, err := os.Stat(path)
-	if os.IsNotExist(err) {
-		return false
-		
+	if err != nil {
+		return exists
 	}
-	return info.IsDir()
+	exists = true
+
+	//criteria 2: file is a directory
+	if  !info.IsDir() {
+		exists = false
+		return exists
+	}
+	return exists
 }
 
 
 
-//TESTME
+//TESTED
 func AssertIfPathIsAbsolute(path string) bool {
-		panic("implement me")
 
-	return strings.HasPrefix(path, "/")
+	var isAbsolute bool
+	
+	//criteria 1: starts with a slash
+	if strings.HasPrefix(path, "/") {
+		isAbsolute = true
+	}
+
+	//criteria 2: starts with a drive letter
+	if len(path) >= 2 {
+		if path[1] == ':' {
+			isAbsolute = true
+		}
+	}
+
+	//criteria 3: starts with a double backslash
+	if len(path) >= 2 {
+		if path[0] == '\\' && path[1] == '\\' {
+			isAbsolute = true
+		}
+	}
+
+	return isAbsolute
 }
 
 //TESTME
 func AssertIfPathIsRelative(path string) bool {
-		panic("implement me")
+	
+	isRelative := false
+
+	//criteria 1: starts with a slash
+	if strings.HasPrefix(path, "/") {
+		
+		
+	}
 
 	return !strings.HasPrefix(path, "/")
 }

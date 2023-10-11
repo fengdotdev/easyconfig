@@ -8,7 +8,39 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestAssertFileExist(t *testing.T) {
+const (
+
+
+	someAbsoluteUnixPath = "/home/user/somefile.txt" 
+	someRelativeUnixPath = "home/user/somefile.txt" 
+	someAbsoluteWinPath = "C:\\Users\\user\\somefile.txt" 
+	someRelativeWinPath = "Users\\user\\somefile.txt" 
+	someWinServerPath = "\\\\server\\share\\somefile.txt" // server path
+	someWebResourceUrl = "http://www.example.com/somefile.txt"
+	someWebResourceUrl2 = "www.example.com/somefile.txt"
+	someWebResourceUrl3 = "./somefile.txt"
+	someWebUrl = "http://www.example.com"
+	someWebUrl2 = "www.example.com"
+	someWebUrl3 = "./"
+	someWebUrl4 = "192.168.1.1"
+	someWebUrl5 =  "192.168.1.1:8080"
+	someFilePath = "somefile.txt" // other path
+	someFilePath2 = "somefile" // other path
+	someFilePath3 = "/somefile.txt" // other path  ???
+	
+	someDotPath = "."
+	someDotDotPath = ".."
+	someEmptyPath = ""
+
+)
+
+
+
+
+
+
+
+func Test_AssertFileExist_default(t *testing.T) {
 	filepath:= "tempfile.xyz"
 
 	assert.False(t, disk.AssertFileExists(filepath),false)
@@ -35,7 +67,7 @@ func TestAssertFileExist(t *testing.T) {
 
 
 
-func TestAssertDirectoryExist(t *testing.T) {
+func Test_AssertDirectoryExist_default(t *testing.T) {
 	dirpath:= "tempdir"
 
 	_, er := os.Stat(dirpath)
@@ -60,5 +92,17 @@ func TestAssertDirectoryExist(t *testing.T) {
 	createfile.Close()
 	assert.False(t, disk.AssertDirectoryExist(filepath),false)
 	os.Remove("tempfile.xyz")
+
+}
+
+//PURE
+func Test_AssertIfPathIsAbsolute_default(t *testing.T){
+
+	
+	assert.True(t, disk.AssertIfPathIsAbsolute(someunixpath),true)
+	assert.False(t, disk.AssertIfPathIsAbsolute(someunixpath2),false)
+	assert.True(t, disk.AssertIfPathIsAbsolute(somewinpath),true)
+	assert.False(t, disk.AssertIfPathIsAbsolute(somewinpath2),false)
+	assert.True(t, disk.AssertIfPathIsAbsolute(someserverpath),true)
 
 }
