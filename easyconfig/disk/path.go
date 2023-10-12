@@ -1,41 +1,72 @@
 package disk
 
-import "strings"
+import (
+	"fmt"
+	"strings"
+)
 
 //TESTME
-func GetParentDir(path string) string {
-		panic("implement me")
+func GetParentsPathDir(path string)(parentName string, er error) {
+		
+	// windows path
+	if strings.Contains(path, "\\") {
 
-	return path[:strings.LastIndex(path, "/")]
-}
+		return path[:strings.LastIndex(path, "\\")], nil
+	}
+
+	// unix path
+	if strings.Contains(path, "/") {
+		return path[:strings.LastIndex(path, "/")], nil
+	}
+	return "", fmt.Errorf("path %s is not a valid path", path)
+} //  GetParentsPathDir
+
+
+
+// WORKING
+// TESTME 
+func GetFileNameFromPath(path string) (fileName string, er error) {
+
+	// windows path
+	if strings.Contains(path, "\\") {
+
+		return path[strings.LastIndex(path, "\\")+1:], nil
+	}
+
+	// unix path
+	if strings.Contains(path, "/") {
+		return path[strings.LastIndex(path, "/")+1:], nil
+	}
+	return "", fmt.Errorf("path %s is not a valid path", path)
+}// GetFileNameFromPath
 
 //TESTME
-func GetFileName(path string) string {
-		panic("implement me")
+func GetFileExtension(path string) (extension string, er error) {
+	
+	filename , err := GetFileNameFromPath(path)
+	if err != nil {
+		return "", err
+	}
 
-	return path[strings.LastIndex(path, "/")+1:]
-}
-
-//TESTME
-func GetFileExtension(path string) string {
-		panic("implement me")
-
-	return path[strings.LastIndex(path, ".")+1:]
-}
+	 if strings.Contains(filename, ".") {
+		return filename[strings.LastIndex(filename, ".")+1:], nil
+	}
+	return "", fmt.Errorf("%s does not contain a file extension", filename)
+}// GetFileExtension
 
 //TESTME
 func GetFileNameWithoutExtension(path string) string {
 		panic("implement me")
 
 	return path[:strings.LastIndex(path, ".")]
-}
+}// GetFileNameWithoutExtension
 
 //TESTME
 func GetSliceOfDirInPath(path string) []string {
 		panic("implement me")
 
 	return strings.Split(path, "/")
-}
+}// GetSliceOfDirInPath
 
 
 //TESTME
@@ -43,5 +74,5 @@ func GetSliceOfDirInPath(path string) []string {
 func NormalizePath(path string) string {
 	panic("implement me")
 	return strings.ReplaceAll(path, "\\", "/")
-}
+}// NormalizePath
 

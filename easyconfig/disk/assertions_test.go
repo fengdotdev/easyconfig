@@ -31,14 +31,7 @@ const (
 	someDotPath = "."
 	someDotDotPath = ".."
 	someEmptyPath = ""
-
 )
-
-
-
-
-
-
 
 func Test_AssertFileExist_default(t *testing.T) {
 	filepath:= "tempfile.xyz"
@@ -64,8 +57,6 @@ func Test_AssertFileExist_default(t *testing.T) {
 	assert.False(t, disk.AssertFileExists(dirpath),false)
 	os.Remove(dirpath)
 }
-
-
 
 func Test_AssertDirectoryExist_default(t *testing.T) {
 	dirpath:= "tempdir"
@@ -99,10 +90,23 @@ func Test_AssertDirectoryExist_default(t *testing.T) {
 func Test_AssertIfPathIsAbsolute_default(t *testing.T){
 
 	
-	assert.True(t, disk.AssertIfPathIsAbsolute(someunixpath),true)
-	assert.False(t, disk.AssertIfPathIsAbsolute(someunixpath2),false)
-	assert.True(t, disk.AssertIfPathIsAbsolute(somewinpath),true)
-	assert.False(t, disk.AssertIfPathIsAbsolute(somewinpath2),false)
-	assert.True(t, disk.AssertIfPathIsAbsolute(someserverpath),true)
-
+	assert.True(t, disk.AssertIfPathIsAbsolute(someAbsoluteUnixPath),true)
+	assert.False(t, disk.AssertIfPathIsAbsolute(someRelativeUnixPath),false)
+	assert.True(t, disk.AssertIfPathIsAbsolute(someAbsoluteWinPath),true)
+	assert.False(t, disk.AssertIfPathIsAbsolute(someRelativeWinPath),false)
+	assert.True(t, disk.AssertIfPathIsAbsolute(someWinServerPath),true)
+	assert.False(t, disk.AssertIfPathIsAbsolute(someWebResourceUrl),false)
+	assert.False(t, disk.AssertIfPathIsAbsolute(someWebResourceUrl2),false)
+	assert.False(t, disk.AssertIfPathIsAbsolute(someWebResourceUrl3),false)
+	assert.False(t, disk.AssertIfPathIsAbsolute(someWebUrl),false)
+	assert.False(t, disk.AssertIfPathIsAbsolute(someWebUrl2),false)
+	assert.False(t, disk.AssertIfPathIsAbsolute(someWebUrl3),false)
+	assert.False(t, disk.AssertIfPathIsAbsolute(someWebUrl4),false)
+	assert.False(t, disk.AssertIfPathIsAbsolute(someWebUrl5),false)
+	assert.False(t, disk.AssertIfPathIsAbsolute(someFilePath),false)
+	assert.False(t, disk.AssertIfPathIsAbsolute(someFilePath2),false)
+	assert.False(t, disk.AssertIfPathIsAbsolute(someFilePath3),false)
+	assert.False(t, disk.AssertIfPathIsAbsolute(someDotPath),false)
+	assert.False(t, disk.AssertIfPathIsAbsolute(someDotDotPath),false)
+	assert.False(t, disk.AssertIfPathIsAbsolute(someEmptyPath),false)
 }

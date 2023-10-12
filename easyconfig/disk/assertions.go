@@ -82,13 +82,14 @@ func AssertIfPathIsRelative(path string) bool {
 	
 	isRelative := false
 
-	//criteria 1: starts with a slash
+	//criteria 1: relative path does not start with a slash
 	if strings.HasPrefix(path, "/") {
-		
-		
+		isRelative = false
+		return isRelative
 	}
 
-	return !strings.HasPrefix(path, "/")
+	isRelative = true
+	return isRelative
 }
 
 //TESTME
